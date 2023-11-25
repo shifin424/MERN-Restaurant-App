@@ -9,8 +9,8 @@ function App() {
   return (
     <div>
       <Theme />
-        <Router>
-         <Routes>
+      <Router>
+        <Routes>
           <Route path='*' element={<UserRoutes />} />
         </Routes>
       </Router>

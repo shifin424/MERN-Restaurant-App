@@ -1,33 +1,3 @@
-// import Sequelize from 'sequelize';
-//  import sequelize from '../config/database.js';
-
-
-
-// const Restaurant = sequelize.define('restaurant', {
-//     name: {
-//         type: Sequelize.STRING,
-//         allowNull: false
-//     },
-//     address: {
-//         type: Sequelize.STRING,
-//         allowNull: false
-//     },
-//     contact: {
-//         type: Sequelize.STRING,
-//         allowNull: false
-//     },
-//     imageUrl: {
-//         type: Sequelize.STRING,
-//         allowNull: false
-//     },
-//     publicId: {
-//         type: Sequelize.STRING,
-//         allowNull: false
-//     }
-// });
-
-// export default Restaurant;
-
 
 export default (sequelize, DataTypes) => {
 
