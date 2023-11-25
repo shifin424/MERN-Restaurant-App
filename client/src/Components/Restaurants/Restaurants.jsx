@@ -3,6 +3,7 @@ import { DownOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Dropdown, Menu, message } from 'antd';
 import logo from '../../Assets/Images/restaurant.jpg';
 import AddButton from '../Button/Button';
+import { Link } from 'react-router-dom';
 
 const handleButtonClick = (e) => {
     message.info('Click on left button.');
@@ -43,9 +44,10 @@ const Restaurant = () => (
     <div className="p-8">
         <div className="flex items-center justify-between mb-6">
             <h1 className="text-4xl font-bold text-gray-600 text-center md:text-left">Discover Amazing Restaurants</h1>
-            <AddButton
+            <Link to='/restaurants/add'> <AddButton
                 className="bg-[#F39300] text-white px-6 py-3 rounded-lg hover:bg-orange-700 transition w-full md:w-full"
                 text="Explore Now" />
+            </Link>
         </div>
 
         <div className="flex flex-wrap justify-center items-center p-4">
