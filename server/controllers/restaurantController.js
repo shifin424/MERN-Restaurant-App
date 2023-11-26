@@ -35,6 +35,7 @@ export const createRestaurant = async (req, res, next) => {
 export const updateRestaurant = async (req, res, next) => {
     try {
         let id = req.params.id
+        console.log(id,"Id Tracked")
 
         const product = await Restaurant.update(req.body, { where: { id: id } })
         res.status(200).json({

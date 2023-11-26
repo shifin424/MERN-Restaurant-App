@@ -11,6 +11,7 @@ const AddRestaurant = () => {
 
     const navigate = useNavigate()
     const [selectedImage, setSelectedImage] = useState(null);
+    const [loading, setLoading] = useState(false)
 
     const validationSchema = Yup.object().shape({
         name: Yup.string().required('Restaurant name is required').max(30, 'Restaurant name must be at most 30 characters'),
@@ -62,6 +63,8 @@ const AddRestaurant = () => {
             resetForm();
         } catch (err) {
             console.log(err)
+        }finally{
+            setLoading(false)
         }
 
     };
@@ -141,9 +144,7 @@ const AddRestaurant = () => {
                                 />
                             </div>
                             <div className="mt-6">
-                                <Button text="Submit" className='bg-[#f29e21] font-bold text-lg text-white  px-2 py-3' loading={isSubmitting}>
-                                    Add Restaurant
-                                </Button>
+                            <Button text={loading ? 'Submitting...' : 'Submit'} className="bg-[#f29e21] font-bold text-lg text-white px-2 py-3" loading={loading || isSubmitting} />
                             </div>
                         </FormikForm>
                     )}

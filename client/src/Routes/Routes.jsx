@@ -13,7 +13,7 @@ const UserRoutes = () => {
                 <Route path="/" element={<Home />} />
                 <Route path="/restaurants" element={<Restaurant />} />
                 <Route path="/restaurants/add" element={<NewRestaurant />} />
-                <Route path="/restaurant/update" element={<UpdateRestaurant/>}/>
+                <Route path="/restaurant/update/:restaurantId" element={<UpdateRestaurant/>}/>
             </Routes>
         </div>
     )

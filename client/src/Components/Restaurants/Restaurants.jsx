@@ -26,8 +26,8 @@ const Restaurant = () => {
         fetchData();
     }, []);
 
-    const handleUpdateClick = () => {
-        navigate('/restaurant/update');
+    const handleUpdateClick = (restaurantId) => {
+        navigate(`/restaurant/update/${restaurantId}`);
     };
 
     const handleDeleteClick = async (restaurantId) => {
@@ -90,7 +90,7 @@ const Restaurant = () => {
 
                         <div className="absolute bottom-4  left-0 right-0 text-center">
                             <Button
-                                onClick={handleUpdateClick}
+                                onClick={() => handleUpdateClick(restaurant.id)}
                                 className='bg-white mr-2 '
                             >
                                 Update

@@ -10,7 +10,7 @@ Tasty Track is a powerful web application crafted with the MERN stack and powere
 - Frontend: React, Ant Design, Formik, Yup
 - Backend: Node.js, Express, Sequelize, Cloudinary, Axios
 - Database: MySQL
-- Other tools: SweetAlert2, Tailwind CSS, Vite
+- Other tools: SweetAlert2, Tailwind CSS.
 - State management: React Context API
 - Routing: React Router
 - Form validation: Yup

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Card, Input, message } from 'antd';
 import { Formik, Field, Form as FormikForm, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
@@ -10,14 +10,20 @@ import { RestaurantListingApi, RestaurantUpdateApi } from '../../Services/Servic
 const UpdateRestaurant = () => {
 
     const navigate = useNavigate();
-    const [restaurantData, setRestaurantData] = useState([]);
+    const { restaurantId } = useParams();
+    console.log(restaurantId)
+    const [restaurantData, setRestaurantData] = useState({});
+    console.log(restaurantData,"this is rest")
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await RestaurantListingApi();
+                console.log(response, "this is the response");
                 if (response && response.data) {
-                    setRestaurantData(response.data);
+                    const selectedRestaurant = response.data.find((restaurant) => restaurant.id === parseInt(restaurantId));
+                    console.log(selectedRestaurant, "new ID");
+                    setRestaurantData(selectedRestaurant);
                 } else {
                     message.error('Network error');
                 }
@@ -26,7 +32,7 @@ const UpdateRestaurant = () => {
             }
         };
         fetchData();
-    }, []);
+    }, [restaurantId]);
 
     const validationSchema = Yup.object().shape({
         name: Yup.string().required('Restaurant name is required').max(30, 'Restaurant name must be at most 30 characters'),
@@ -43,7 +49,7 @@ const UpdateRestaurant = () => {
     const handleSubmit = async (values, { resetForm }) => {
         try {
 
-            const response = await RestaurantUpdateApi(values?.id, values);
+            const response = await RestaurantUpdateApi(values.id, values);
             if (response?.status === 200) {
                 navigate('/restaurants');
                 message.success('Restaurant Updated Successfully');
@@ -58,11 +64,10 @@ const UpdateRestaurant = () => {
 
     return (
         <div className="container mx-auto mt-5 p-8">
-            {restaurantData.map((restaurant) => (
-                <Card key={restaurant?.id} className="w-full md:w-1/3 mx-auto p-6 rounded-md border bg-[#fcca80] border-gray-300 mb-4">
+                <Card key={restaurantData?.id} className="w-full md:w-1/3 mx-auto p-6 rounded-md border bg-[#fcca80] border-gray-300 mb-4">
                     <h1 className="text-4xl font-bold text-gray-600 text-center mb-6">Update Restaurant</h1>
 
-                    <Formik initialValues={{ ...initialValues, ...restaurant }} validationSchema={validationSchema} onSubmit={handleSubmit}>
+                    <Formik initialValues={{ ...initialValues, ...restaurantData }} validationSchema={validationSchema} onSubmit={handleSubmit}>
                         {({ isSubmitting }) => (
                             <FormikForm>
                                 <div className="mb-4">
@@ -106,9 +111,9 @@ const UpdateRestaurant = () => {
                                     />
                                     <ErrorMessage name="contact" component="div" className="text-red-500" />
                                 </div>
-                                <Field type="hidden" id="id" name="id" value={restaurant?.id} />
+                                <Field type="hidden" id="id" name="id" value={restaurantData?.id} />
                                 <div className="mb-4">
-                                    <img src={restaurant?.imageUrl} alt="Restaurant Image" className="w-full h-auto" />
+                                    <img src={restaurantData?.imageUrl} alt="Restaurant Image" className="w-full h-auto" />
                                 </div>
                                 
                                 <div className="mt-6">
@@ -120,7 +125,6 @@ const UpdateRestaurant = () => {
                         )}
                     </Formik>
                 </Card>
-            ))}
         </div>
     );
 };
